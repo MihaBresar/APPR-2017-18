@@ -2,10 +2,16 @@
 
 Repozitorij z gradivi pri predmetu APPR v študijskem letu 2017/18
 
-## Tematika
+## Analiza naborov v ligi NBA
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal. Tukaj boste
-napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+V projektu bom analiziral nabore v ligi NBA. Analiziral bom uspešnost ekip in igralcev. Analiziral bom s pomočjo statističnih podatkov(število točk, skokov, podaj,...) in uspehov (uvrstitev v končnico, število zmag).
+
+Za vir podatkov bom uporabil:
+
+https://www.basketball-reference.com/draft/
+
+https://en.wikipedia.org/wiki/NBA_draft
+
 
 ## Program
 
