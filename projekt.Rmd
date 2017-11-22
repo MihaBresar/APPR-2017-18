@@ -21,7 +21,7 @@ source("lib/libraries.r", encoding = "UTF-8")
 
 # Izbira teme
 
-Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
+V projektu bom analiziral nabore v ligi NBA. Analiziral bom uspešnost ekip in igralcev. Igralce bom ocenjeval na podlagi statistike in dobrinosa ekipi. Ekipe pa na podlagi uspešnosti igralcev ki so jih izbrale na naborih. S to analizo želim ugotoviti, katere ekipe so najboljše pri izbiranju mladih igralcev. Analiziral bom tudi univerze s katerih prihajajo igralci. Večina igralcev, ki so izbrani na naboru, namreč prihaja z ameriških univerz.
 
 ***
 
