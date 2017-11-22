@@ -1,17 +1,32 @@
 # Analiza podatkov s programom R, 2017/18
 
+## Analiza naborov v ligi NBA
+Avtor: Miha Brešar
+
 Repozitorij z gradivi pri predmetu APPR v študijskem letu 2017/18
 
-## Analiza naborov v ligi NBA
+## Tematika
 
-V projektu bom analiziral nabore v ligi NBA. Analiziral bom uspešnost ekip in igralcev. Analiziral bom s pomočjo statističnih podatkov(število točk, skokov, podaj,...) in uspehov (uvrstitev v končnico, število zmag).
+V projektu bom analiziral nabore v ligi NBA. Analiziral bom uspešnost ekip in igralcev. Igralce bom ocenjeval na podlagi statistike in dobrinosa ekipi. Ekipe pa na podlagi uspešnosti igralcev ki so jih izbrale na naborih. S to analizo želim ugotoviti, katere ekipe so najboljše pri izbiranju mladih igralcev. Analiziral bom tudi univerze s katerih prihajajo igralci. Večina igralcev, ki so izbrani na naboru, namreč prihaja z ameriških univerz. 
 
 Za vir podatkov bom uporabil:
 
-https://www.basketball-reference.com/draft/
+https://www.basketball-reference.com/draft/ 
 
-https://en.wikipedia.org/wiki/NBA_draft
+https://en.wikipedia.org/wiki/NBA_draft 
 
+Tabele (osnovna ideja):
+
+V tabelah bom zbral podatke:
+1. Ime in Priimek igralca
+2. Univerza kjer je igral pred naborom
+3. Izbor
+4. Leto nabora
+5.Podatki, ki merijo uspešnost igralcev(odigrane tekme, točke, win-shares, ...)
+
+Načrt:
+
+Z dobljenimi podatki bom ob analizah, ki sem jih omenil v uvodu poizkušal tudi napovedati uspešnost igralcev, ki bodo letos izbrani na naboru.
 
 ## Program
 
