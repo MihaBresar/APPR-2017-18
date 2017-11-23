@@ -26,7 +26,7 @@ V tabelah bom zbral podatke:
 
 4. Leto nabora  
 
-5.Podatki, ki merijo uspešnost igralcev(odigrane tekme, točke, win-shares, ...)
+ 5.Podatki o uspešnost igralcev(odigrane tekme, točke, win-shares, ...)
 
 Načrt:
 
