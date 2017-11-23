@@ -41,7 +41,7 @@ Ekipe:
  
 Načrt:
 
-Z dobljenimi podatki bom ob analizah, ki sem jih omenil v uvodu poizkušal tudi napovedati uspešnost igralcev, ki bodo letos izbrani na naboru.
+Z dobljenimi podatki bom poskušal napovedati uspešnost igralcev, ki bodo letos izbrani na naboru.
 
 ## Program
 
