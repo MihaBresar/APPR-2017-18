@@ -18,7 +18,9 @@ https://en.wikipedia.org/wiki/NBA_draft
 Tabele (osnovna ideja):
 
 V tabelah bom zbral podatke:
+
  Igralci:
+ 
   1. Ime in Priimek igralca
 
   2. Univerza kjer je igral pred naborom
