@@ -28,12 +28,15 @@ V tabelah bom zbral podatke:
   4. Leto nabora  
 
   5.Podatki o uspešnost igralcev(odigrane tekme, točke, win-shares, ...)
+
 Ekipe:
+ 
  1. Ime
  
  2. Uspešnost na naborih
  
  3. Zmage
+ 
 Načrt:
 
 Z dobljenimi podatki bom ob analizah, ki sem jih omenil v uvodu poizkušal tudi napovedati uspešnost igralcev, ki bodo letos izbrani na naboru.
