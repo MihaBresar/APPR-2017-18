@@ -21,7 +21,7 @@ V tabelah bom zbral podatke:
 1. Ime in Priimek igralca
 2. Univerza kjer je igral pred naborom
 3. Izbor
-4. Leto nabora
+4. Leto nabora  
 5.Podatki, ki merijo uspešnost igralcev(odigrane tekme, točke, win-shares, ...)
 
 Načrt:
