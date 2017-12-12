@@ -1,3 +1,6 @@
+sl <- locale("sl", decimal_mark = ",", grouping_mark = ".")
+
+
 uvozi.draft1 <- function() {
   link <- "https://en.wikipedia.org/wiki/2007_NBA_draft"
   stran <- html_session(link) %>% read_html()
@@ -20,8 +23,8 @@ uvozi.draft1 <- function() {
   return(tabela)
 }
 
-  
-  
+
+
 
 uvozi.draft2 <- function() {
   link <- "https://en.wikipedia.org/wiki/2008_NBA_draft"
@@ -44,5 +47,10 @@ uvozi.draft2 <- function() {
   
   return(tabela)
 }
-
-
+a = uvozi.draft1()
+a["Leto"] <- NA
+a$Leto <- 2007
+b = uvozi.draft2()
+b["Leto"] <- NA
+b$Leto <- 2008
+c = rbind(a,b)
