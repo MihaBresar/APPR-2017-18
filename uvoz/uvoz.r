@@ -43,5 +43,25 @@ a5$Leto <- 2011
 a6 = uvozi.draft("https://en.wikipedia.org/wiki/2012_NBA_draft")
 a6["Leto"] <- NA
 a6$Leto <- 2012
-c = rbind(a1,a2,a3,a4,a5,a6)
+Podatki_wiki= rbind(a1,a2,a3,a4,a5,a6)
+
+
+
+uvoz <- function() {
+  data <- read_csv("podatki/2007draft.csv", 
+                   locale=locale(encoding="cp1250"),skip = 1)
+
+  return(data)
+}
+
+
+
+Podatki_bbalreference <- uvoz()
+
+
+
+
+
+
+
 
