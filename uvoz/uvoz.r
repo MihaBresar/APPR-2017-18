@@ -10,12 +10,12 @@ uvozi.draft<- function(site) {
       Encoding(tabela[[i]]) <- "UTF-8"
     }
   }
-  colnames(tabela) <- c("Krog", "Izbor", "Igralec", "Pozicija", "Državljanstvo",
+  colnames(tabela) <- c("Krog", "Izbor", "Igralec", "Pozicija", "DrĹľavljanstvo",
                         "Ekipa", "Ekipa pred naborom")
   for (col in c("Krog", "Izbor")) {
     tabela[[col]] <- parse_number(tabela[[col]], na = "-", locale = sl)
   }
-  for (col in c("Igralec", "Pozicija", "Državljanstvo","Ekipa", "Ekipa pred naborom")) {
+  for (col in c("Igralec", "Pozicija", "DrĹľavljanstvo","Ekipa", "Ekipa pred naborom")) {
     tabela[[col]] <- factor(tabela[[col]])
   }
   
@@ -47,18 +47,30 @@ Podatki_wiki= rbind(a1,a2,a3,a4,a5,a6)
 
 
 
-uvoz <- function() {
+uvoz <- function(mapa) {
   data <- read_csv("podatki/2007draft.csv", 
                    locale=locale(encoding="cp1250"),skip = 1)
 
   return(data)
 }
 
+uvoz_csv <- function(mapa) {
+  data <- read_csv(mapa, 
+                   locale=locale(encoding="cp1250"),skip = 1)
+  
+  return(data)
+}
 
 
-Podatki_bbalreference <- uvoz()
 
+b1 <- uvoz_csv("podatki/2007draft.csv")
+b2 <- uvoz_csv("podatki/2008draft.csv")
+b3 <- uvoz_csv("podatki/2009draft.csv")
+b4 <- uvoz_csv("podatki/2010draft.csv")
+b5 <- uvoz_csv("podatki/2011draft.csv")
+b6 <- uvoz_csv("podatki/2012draft.csv")
 
+Podatki_csv <- rbind(b1,b2,b3,b4,b5,b6)
 
 
 
