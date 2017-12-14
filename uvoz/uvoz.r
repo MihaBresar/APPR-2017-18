@@ -47,13 +47,6 @@ Podatki_wiki= rbind(a1,a2,a3,a4,a5,a6)
 
 
 
-uvoz <- function(mapa) {
-  data <- read_csv("podatki/2007draft.csv", 
-                   locale=locale(encoding="cp1250"),skip = 1)
-
-  return(data)
-}
-
 uvoz_csv <- function(mapa) {
   data <- read_csv(mapa, 
                    locale=locale(encoding="cp1250"),skip = 1)
@@ -71,9 +64,6 @@ b5 <- uvoz_csv("podatki/2011draft.csv")
 b6 <- uvoz_csv("podatki/2012draft.csv")
 
 Podatki_csv <- rbind(b1,b2,b3,b4,b5,b6)
-
-
-
-
-
-
+Podatki_csv <- separate(Podatki_csv,"Player", c("Igralec", "koda"), sep = "\\\\")
+Podatki_csv <- Podatki_csv[-c(5)]
+Podatki_csv <- replace_na(Podatki_csv, list(G = 0))
