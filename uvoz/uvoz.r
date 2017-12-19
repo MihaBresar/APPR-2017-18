@@ -1,3 +1,4 @@
+
 sl <- locale("sl", decimal_mark = ",", grouping_mark = ".")
 
 uvozi.draft<- function(site) {
@@ -10,12 +11,12 @@ uvozi.draft<- function(site) {
       Encoding(tabela[[i]]) <- "UTF-8"
     }
   }
-  colnames(tabela) <- c("Krog", "Izbor", "Igralec", "Pozicija", "DrĹľavljanstvo",
+  colnames(tabela) <- c("Rk", "Pk", "Igralec", "Pozicija", "Drzavljanstvo",
                         "Ekipa", "Ekipa pred naborom")
-  for (col in c("Krog", "Izbor")) {
+  for (col in c("Rk", "Pk")) {
     tabela[[col]] <- parse_number(tabela[[col]], na = "-", locale = sl)
   }
-  for (col in c("Igralec", "Pozicija", "DrĹľavljanstvo","Ekipa", "Ekipa pred naborom")) {
+  for (col in c("Igralec", "Pozicija", "Drzavljanstvo","Ekipa", "Ekipa pred naborom")) {
     tabela[[col]] <- factor(tabela[[col]])
   }
   
@@ -67,3 +68,10 @@ Podatki_csv <- rbind(b1,b2,b3,b4,b5,b6)
 Podatki_csv <- separate(Podatki_csv,"Player", c("Igralec", "koda"), sep = "\\\\")
 Podatki_csv <- Podatki_csv[-c(5)]
 Podatki_csv <- replace_na(Podatki_csv, list(G = 0))
+Podatki_wiki["Igralec"] <- Podatki_csv["Igralec"]
+df <- Podatki_wiki[,c("Igralec","Pozicija","Drzavljanstvo","Leto")]
+Skupni_podatki<- inner_join(Podatki_csv, df, by = NULL, copy = FALSE)
+
+
+
+
