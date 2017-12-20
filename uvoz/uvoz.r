@@ -66,11 +66,11 @@ b6 <- uvoz_csv("podatki/2012draft.csv")
 
 Podatki_csv <- rbind(b1,b2,b3,b4,b5,b6)
 Podatki_csv <- separate(Podatki_csv,"Player", c("Igralec", "koda"), sep = "\\\\")
-Podatki_csv <- Podatki_csv[-c(5)]
-Podatki_csv <- replace_na(Podatki_csv, list(G = 0))
+Podatki_csv <- Podatki_csv[-c(5,6)]
 Podatki_wiki["Igralec"] <- Podatki_csv["Igralec"]
 df <- Podatki_wiki[,c("Igralec","Pozicija","Drzavljanstvo","Leto")]
 Skupni_podatki<- inner_join(Podatki_csv, df, by = NULL, copy = FALSE)
+Skupni_podatki[is.na(Skupni_podatki)] = 0
 
 
 
