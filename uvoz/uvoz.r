@@ -65,13 +65,18 @@ b5 <- uvoz_csv("podatki/2011draft.csv")
 b6 <- uvoz_csv("podatki/2012draft.csv")
 
 Podatki_csv <- rbind(b1,b2,b3,b4,b5,b6)
+Podatki_csv$Tm[Podatki_csv$Tm == "SEA"] <- "OKC"
+Podatki_csv$Tm[Podatki_csv$Tm == "NOK"] <- "NOH"
+
 Podatki_csv <- separate(Podatki_csv,"Player", c("Igralec", "koda"), sep = "\\\\")
 Podatki_csv <- Podatki_csv[-c(5,6)]
 Podatki_wiki["Igralec"] <- Podatki_csv["Igralec"]
+Podatki_csv["Rk"] <- Podatki_wiki["Rk"]
 df <- Podatki_wiki[,c("Igralec","Pozicija","Drzavljanstvo","Leto")]
 Skupni_podatki<- inner_join(Podatki_csv, df, by = NULL, copy = FALSE)
 Skupni_podatki[is.na(Skupni_podatki)] = 0
+Podatki_csv[is.na(Podatki_csv)] = 0
 
-
+rm(a,df,a1,a2,a3,a4,a5,a6,b1,b2,b3,b4,b5,b6)
 
 
