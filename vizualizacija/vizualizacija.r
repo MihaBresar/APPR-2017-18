@@ -30,6 +30,32 @@ Uspesnost_ekip <- merge(Uspesnost_ekip1,Uspesnost_ekip2)
 Uspesnost_ekip <- merge(Uspesnost_ekip,Uspesnost_ekip3)
 rm(Uspesnost_ekip1,Uspesnost_ekip2,Uspesnost_ekip3)
 
+Uspesnost_drzav <- aggregate(Skupni_podatki$WS, by=list(Skupni_podatki$Drzavljanstvo), FUN=sum)
+leta_drzava <- aggregate(Skupni_podatki$Yrs, by=list(Skupni_podatki$Drzavljanstvo), FUN=sum)
+igralci_drzava <- aggregate(Skupni_podatki$Leto, by=list(Skupni_podatki$Drzavljanstvo), FUN=sum)
+igralci_drzava["x"] <- round(igralci_drzava["x"]/2007)
+
+colnames(Uspesnost_drzav) <- c("drzava","Uspeh")
+colnames(leta_drzava) <- c("drzava","Let")
+colnames(igralci_drzava) <- c("drzava","Igralcev")
+
+Uspesnost_drzav <- merge(Uspesnost_drzav,leta_drzava)
+Uspesnost_drzav <- merge(Uspesnost_drzav,igralci_drzava)
+
+Evropske <- Uspesnost_drzav[-c(1, 2, 3, 5, 6, 7, 8, 9, 12, 13, 16, 17, 18, 24, 29, 30, 31, 32, 33, 35, 40,44:53), ] 
+
+Evropske.norm <- Evropske %>% select(-drzava, -Let, -Igralcev) %>% scale()
+rownames(Evropske.norm) <- Evropske$drzava
+
+
+
+
+
+
+
+
+
+
 #Grafi
 
 graf_Uspeh <- ggplot(data = Uspesnost_ekip) + 
@@ -47,6 +73,56 @@ graf_Relativen_uspeh <- ggplot(data = Uspesnost_ekip) +
   xlab("Ekipa") + 
   ylab("Relativen_uspeh") +
   ggtitle("Uspešnost ekip na naborih")
+
+
+
+
+
+
+
+
+
+
+
+#Zemljevidi:
+
+
+
+
+zemljevid <- uvozi.zemljevid("http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip",
+                             "ne_50m_admin_0_countries", 
+                             encoding = "UTF-8") %>%
+  pretvori.zemljevid() %>% filter(long > -30, long < 50, lat > 25, lat < 75)
+
+
+colnames(zemljevid)[11] <- 'drzava'
+
+zemljevid$drzava <- as.character(zemljevid$drzava)
+zemljevid$drzava[zemljevid$drzava == "Republic of Serbia"] <- "Serbia"
+zemljevid$drzava <- as.factor(zemljevid$drzava)
+
+k <- kmeans(Evropske.norm, 5,nstart = 1000)
+Skupine <- data.frame(drzava = Evropske$drzava, skupina = factor(k$cluster))
+rownames(Skupine)<- NULL
+
+zemljevid1 <- ggplot() + geom_polygon(data = zemljevid %>% left_join(Skupine, by = c("drzava" = "drzava")),
+                                      aes(x = long, y = lat, group = group, fill = skupina), show.legend=T) +
+  ggtitle('Države razdeljene v 5 skupin glede na BDP per capita.') + xlab("long") + ylab("lat") +
+  coord_quickmap(xlim = c(-25, 40), ylim = c(32, 72))
+
+zemljevid2 <- ggplot() + geom_polygon(data = zemljevid %>% left_join(Evropske),
+                                      aes(x = long, y = lat, group = group, fill=Igralcev)) +
+  coord_quickmap(xlim = c(-25, 40), ylim = c(32, 72)) 
+
+
+
+
+
+
+
+
+
+
 
 
 
