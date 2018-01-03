@@ -47,7 +47,20 @@ Evropske <- Uspesnost_drzav[-c(1, 2, 3, 5, 6, 7, 8, 9, 12, 13, 16, 17, 18, 24, 2
 Evropske.norm <- Evropske %>% select(-drzava, -Let, -Igralcev) %>% scale()
 rownames(Evropske.norm) <- Evropske$drzava
 
+najboljsi_igralci <-   Skupni_podatki[rev(order(Skupni_podatki$WS)),]
+najboljsi_igralci <- najboljsi_igralci[c(1:10),]
 
+
+row.names(Skupni_podatki) <- Skupni_podatki$Igralec
+Skupni_podatki$Igralec <- NULL
+
+Evropske1 <- Evropske
+row.names(Evropske1) <- Evropske1$drzava
+Evropske1$drzava <- NULL
+
+#Število skupin
+n <- 5
+skupine3 <- hclust(dist(scale(Evropske1))) %>% cutree(n)
 
 
 
@@ -73,6 +86,18 @@ graf_Relativen_uspeh <- ggplot(data = Uspesnost_ekip) +
   xlab("Ekipa") + 
   ylab("Relativen_uspeh") +
   ggtitle("Uspešnost ekip na naborih")
+
+
+
+Graf_evropskih <- ggplot(inner_join(Evropske, data.frame(drzava = names(skupine3),skupina = factor(skupine3)), by = "drzava")
+                         , aes(x = Uspeh, y = Let, color = skupina, size = Igralcev/1000)) + geom_point() +
+  ggtitle("graf evropskih") +
+  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") +
+  guides(color = guide_legend(title = "Skupina"),
+         size = guide_legend(title = "Prebivalci (* 1000)"))
+
+
+
 
 
 
@@ -107,13 +132,13 @@ rownames(Skupine)<- NULL
 
 zemljevid1 <- ggplot() + geom_polygon(data = zemljevid %>% left_join(Skupine, by = c("drzava" = "drzava")),
                                       aes(x = long, y = lat, group = group, fill = skupina), show.legend=T) +
-  ggtitle('Države razdeljene v 5 skupin glede na BDP per capita.') + xlab("long") + ylab("lat") +
+  ggtitle('Države razdeljene v 5 skupin glede na uspešnsost') + xlab("long") + ylab("lat") +
   coord_quickmap(xlim = c(-25, 40), ylim = c(32, 72))
 
 zemljevid2 <- ggplot() + geom_polygon(data = zemljevid %>% left_join(Evropske),
                                       aes(x = long, y = lat, group = group, fill=Igralcev)) +
+  ggtitle('Države glede na število igralcev v ligi NBA')
   coord_quickmap(xlim = c(-25, 40), ylim = c(32, 72)) 
-
 
 
 
