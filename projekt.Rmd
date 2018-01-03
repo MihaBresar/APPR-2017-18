@@ -17,12 +17,11 @@ runtime: shiny
 
 # Uvoz vseh potrebnih knjižnic
 source("lib/libraries.r", encoding = "UTF-8")
-source("lib/uvozi.zemljevid", encoding = "UTF-8")
 ```
 
 # Izbira teme
 
-V projektu bom analiziral nabore v ligi NBA. Analiziral bom uspešnost ekip in igralcev. Igralce bom ocenjeval na podlagi statistike in dobrinosa ekipi. Ekipe pa na podlagi uspešnosti igralcev ki so jih izbrale na naborih. S to analizo želim ugotoviti, katere ekipe so najboljše pri izbiranju mladih igralcev. Analiziral bom tudi evropske države in uspeh evropskih igralcev v ligi NBA. Za konec želim na podlagi rezultatov preteklih let napovedati uspeh igralcev, ki bodo letos začeli kariero. 
+V projektu bom analiziral nabore v ligi NBA med letoma 2007 in 2012. Igralci izbrani na teh naborih so namreč sedaj v najboljših letih. Zato jih lahko dobro analiziramo. Analiziral bom uspešnost ekip in igralcev. Igralce bom ocenjeval na podlagi statistike in dobrinosa ekipi. Ekipe pa na podlagi uspešnosti igralcev ki so jih izbrale na naborih. S to analizo želim ugotoviti, katere ekipe so najboljše pri izbiranju mladih igralcev. Analiziral bom tudi evropske države in uspeh evropskih igralcev v ligi NBA. Za konec želim na podlagi rezultatov preteklih let napovedati uspeh igralcev, ki bodo letos začeli kariero. 
 
 ***
 
@@ -50,58 +49,33 @@ Obe tabeli sem nato združil v eno veliko tabelo Skupni_podatki
   - `5-21` - meritev: Statistični podatki o učinku igralcev. Uporabni predvsem v četrti fazi
   - `Državljanstvo` - spremenljivka: Državljanstvo igralca
   - `Leto` - spremenljivka: Leto nabora, na katerem je bil igralec izbran
-  
-  
-  
-  
-  
-  
 
 
-Spodnji graf prikazuje porazdelitev števila naselij v občinah.
-
-```{r razpredelnice1,message=FALSE, echo=FALSE}
-
-
-
-```
 
 ***
 
 # Analiza in vizualizacija podatkov
 
+V tretji fazi sem želel čim lepše prikazati uspešnost ekip, draž in igralcev. Začel sem z 'normiranjem igralcev na izbor'. To sem naredil tako, da sem seštel absolutne vrednosti 'win-shares' za vsak izbor. Tako sem dobil absolutno in relativno uspešnost igralcev. Absolutna: Koliko zmag je prinesel igralec ekipi. Relativna: Uspešnost/(vsota absolutnih vrednosti za nabor). Relativna uspešnost je smiselno uporabiti predvsem pri ocenjevanju ekip, saj imajo nekatere ekipe višje izbore kot druge. Pri ocenjevanju Držav sem se osredotočil na absolutno uspešnost in na število igralcev, ki so bili izbrani na naborih. 
+
 ```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE}
 source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 ```
+Najprej si oglejmo tabelo najboljših igralcev. Hitro opazimo velike razlike med igralci, kar je dober znak za začetek analize. V ligi NBA namreč velja, da lahko en dober igralec reši celotno ekipo. 
 
-Spodnji zemljevid prikazuje povprečno velikost družine za vsako občino.
-
-```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
-
+```{r razpredelnice}
+kable(head(najboljsi_igralci), caption = "Najboljši igralci v ligi NBA")
 ```
+
+
+
+
+```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
+Graf_evropskih
+```
+
 
 ***
 
 # Napredna analiza podatkov
 
-```{r analiza, echo=FALSE, message=FALSE}
-source("analiza/analiza.r", encoding = "UTF-8")
-```
-
-Spodnji graf prikazuje povezavo med številom naselij in površino občine.
-
-```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
-ggplot(inner_join(obcine, data.frame(obcina = names(skupine),
-                                     skupina = factor(skupine)), by = "obcina")
-, aes(x = povrsina, y = naselja, color = skupina, size = prebivalci/1000)) + geom_point() +
-  ggtitle("Število naselij glede na površino občine") +
-  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") +
-  guides(color = guide_legend(title = "Skupina"),
-         size = guide_legend(title = "Prebivalci (* 1000)"))
-```
-
-***
-
-```{r shiny, echo = FALSE}
-shinyAppDir("shiny", options=list(width="100%", height=600))
-```
