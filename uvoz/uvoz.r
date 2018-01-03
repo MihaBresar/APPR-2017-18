@@ -1,4 +1,5 @@
 
+
 sl <- locale("sl", decimal_mark = ",", grouping_mark = ".")
 
 uvozi.draft<- function(site) {
@@ -46,6 +47,23 @@ a6["Leto"] <- NA
 a6$Leto <- 2012
 Podatki_wiki= rbind(a1,a2,a3,a4,a5,a6)
 
+Podatki_wiki$Drzavljanstvo <- as.character(Podatki_wiki$Drzavljanstvo)
+Podatki_wiki[9,5] <- "France"
+Podatki_wiki[83,5] <- "Greece"
+Podatki_wiki[84,5] <- "Spain"
+Podatki_wiki[144,5] <- "United Kingdom"
+Podatki_wiki[165,5] <- "Greece"
+Podatki_wiki[170,5] <- "Bosnia and Herzegovina"
+Podatki_wiki[177,5] <- "Turkey"
+Podatki_wiki[243,5] <- "Turkey"
+Podatki_wiki[256,5] <- "Montenegro"
+Podatki_wiki[263,5] <- "Spain"
+Podatki_wiki[271,5] <- "Croatia"
+Podatki_wiki[294,5] <- "Serbia"
+Podatki_wiki[352,5] <- "Serbia"
+Podatki_wiki$Drzavljanstvo <- as.factor(Podatki_wiki$Drzavljanstvo)
+
+
 
 
 uvoz_csv <- function(mapa) {
@@ -77,6 +95,6 @@ Skupni_podatki<- inner_join(Podatki_csv, df, by = NULL, copy = FALSE)
 Skupni_podatki[is.na(Skupni_podatki)] = 0
 Podatki_csv[is.na(Podatki_csv)] = 0
 
-rm(a,df,a1,a2,a3,a4,a5,a6,b1,b2,b3,b4,b5,b6)
+rm(df,a1,a2,a3,a4,a5,a6,b1,b2,b3,b4,b5,b6)
 
 
