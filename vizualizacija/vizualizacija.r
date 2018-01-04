@@ -6,7 +6,7 @@ Podatki_csv["WS"] <- abs(Podatki_csv["WS"])
 Moc_izborov <- aggregate(Podatki_csv$WS, by=list(Podatki_csv$Pk), FUN=sum)
 colnames(Moc_izborov) <- c("Izbor","Moč")
 
-ocene_igralcev <-  Skupni_podatki[c(1,2,3,4,18)]
+ocene_igralcev <-  Skupni_podatki[c(1,2,3,4,12)]
 colnames(ocene_igralcev) <- c("runda","Izbor","Ekipa","Igralec","WS")
 
 ocene_igralcev<- inner_join(ocene_igralcev, Moc_izborov, by = "Izbor", copy = FALSE)
@@ -71,16 +71,10 @@ skupine_ekip <- hclust(dist(scale(Ekipe1))) %>% cutree(m)
 
 skupine_ekip <- inner_join(Uspesnost_ekip, data.frame(Ekipa = names(skupine_ekip),skupina = factor(skupine_ekip)), by = "Ekipa")
 
-skupine_ekip$skupina <- as.character(skupine_ekip$skupina)
-skupine_ekip[1,5] <- "Povprečne"
-skupine_ekip[6,5] <- "Podpovprečne"
-skupine_ekip[2,5] <- "Boston"
-skupine_ekip[11,5] <- "Indiana"
-skupine_ekip[21,5] <- "Oklahoma"
-skupine_ekip$skupina <- as.factor(skupine_ekip$skupina)
 
-skupine_ekip$skupina[skupine_ekip$skupina == "1"] <- "Povprečne"
-skupine_ekip$skupina[skupine_ekip$skupina == "3"] <- "Podpovprečne"
+
+
+
 
 skupine_evropskih <- inner_join(Evropske, data.frame(drzava = names(skupine_drzav),skupina = factor(skupine_drzav)), by = "drzava")
 
@@ -167,7 +161,6 @@ zemljevid1 <- ggplot(data = zemljevid) + geom_polygon(data = zemljevid %>% left_
               summarise(avg_long = mean(long), avg_lat = mean(lat)),
             aes(x = avg_long, y = avg_lat, label = drzava), color = "red") +
   xlab("long") + ylab("lat") +
-  facet_wrap(scales = 'free')
   coord_quickmap(xlim = c(-25, 40), ylim = c(32, 72))
 
 zemljevid2 <- ggplot() + geom_polygon(data = zemljevid %>% left_join(Evropske),
