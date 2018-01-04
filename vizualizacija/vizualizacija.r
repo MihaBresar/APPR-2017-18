@@ -57,14 +57,19 @@ Skupni_podatki$Igralec <- NULL
 Evropske1 <- Evropske
 row.names(Evropske1) <- Evropske1$drzava
 Evropske1$drzava <- NULL
+Evropske1 <- Evropske1[c(1)]
+
+Ekipe1 <- Uspesnost_ekip
+row.names(Ekipe1) <- Ekipe1$Ekipa
+Ekipe1$Ekipa <- NULL
 
 #Število skupin
-n <- 5
-skupine3 <- hclust(dist(scale(Evropske1))) %>% cutree(n)
+n <- 3
+skupine_drzav <- hclust(dist(scale(Evropske1))) %>% cutree(n)
+m <- 3
+skupine2 <- hclust(dist(scale(Ekipe1))) %>% cutree(m)
 
-
-
-
+ex=subset(Ekipe1, Uspeh>=max(Uspeh)|Relativen_uspeh>=max(Relativen_uspeh))
 
 
 
@@ -89,14 +94,22 @@ graf_Relativen_uspeh <- ggplot(data = Uspesnost_ekip) +
 
 
 
-Graf_evropskih <- ggplot(inner_join(Evropske, data.frame(drzava = names(skupine3),skupina = factor(skupine3)), by = "drzava")
-                         , aes(x = Uspeh, y = Let, color = skupina, size = Igralcev/1000)) + geom_point() +
+Graf_ekip <- ggplot(inner_join(Uspesnost_ekip, data.frame(Ekipa = names(skupine2),skupina = factor(skupine2)), by = "Ekipa")
+                         , aes(x = Uspeh, y = Relativen_uspeh, color = skupina, size = Povprecen_izbor/30, label=Uspesnost_ekip$Ekipa))+ geom_point() +
   ggtitle("graf evropskih") +
-  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") +
+  xlab(expression("Uspeh")) + ylab("Relativen uspeh") +
   guides(color = guide_legend(title = "Skupina"),
-         size = guide_legend(title = "Prebivalci (* 1000)"))
+         size = guide_legend(title = "Povprecen_izbor")) +
+  geom_text()
 
-
+Graf_evropskih <- ggplot(inner_join(Evropske, data.frame(drzava = names(skupine_drzav),skupina = factor(skupine_drzav)), by = "drzava")
+                         , aes(x = Uspeh, y = Let, color = skupina, size = Igralcev/1, label = Evropske$drzava)) + geom_point() +
+  ggtitle("graf evropskih") +
+  xlab(expression("Uspeh")) + ylab("Št. let v ligi") +
+  guides(color = guide_legend(title = "Skupina"),
+         size = guide_legend(title = "Št.Igralcev")) +
+  geom_text(check_overlap = TRUE) + 
+  
 
 
 
@@ -126,19 +139,30 @@ zemljevid$drzava <- as.character(zemljevid$drzava)
 zemljevid$drzava[zemljevid$drzava == "Republic of Serbia"] <- "Serbia"
 zemljevid$drzava <- as.factor(zemljevid$drzava)
 
-k <- kmeans(Evropske.norm, 5,nstart = 1000)
-Skupine <- data.frame(drzava = Evropske$drzava, skupina = factor(k$cluster))
+Skupine <- data.frame(drzava = Evropske$drzava, skupina = factor(skupine_drzav))
 rownames(Skupine)<- NULL
+Skupine$skupina <- as.character(Skupine$skupina)
+Skupine[1,2] <- "Manj uspešne"
+Skupine[5,2] <- "Bolj uspešne"
+Skupine[10,2] <- "Srednje uspešne"
+Skupine$skupina <- as.factor(Skupine$skupina)
+Skupine$skupina[Skupine$skupina == "1"] <- "Manj uspešne"
+Skupine$skupina[Skupine$skupina == "2"] <- "Bolj uspešne"
+Skupine$skupina[Skupine$skupina == "3"] <- "Srednje uspešne"
+
+
+
+
 
 zemljevid1 <- ggplot() + geom_polygon(data = zemljevid %>% left_join(Skupine, by = c("drzava" = "drzava")),
-                                      aes(x = long, y = lat, group = group, fill = skupina), show.legend=T) +
+                                       aes(x = long, y = lat, group = group, fill = skupina), show.legend=T) +
   ggtitle('Države razdeljene v 5 skupin glede na uspešnsost') + xlab("long") + ylab("lat") +
   coord_quickmap(xlim = c(-25, 40), ylim = c(32, 72))
 
 zemljevid2 <- ggplot() + geom_polygon(data = zemljevid %>% left_join(Evropske),
                                       aes(x = long, y = lat, group = group, fill=Igralcev)) +
   ggtitle('Države glede na število igralcev v ligi NBA')
-  coord_quickmap(xlim = c(-25, 40), ylim = c(32, 72)) 
+  coord_quickmap(xlim = c(-25, 40), ylim = c(32, 72))
 
 
 
