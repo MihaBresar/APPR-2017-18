@@ -6,6 +6,8 @@ Podatki_csv["WS"] <- abs(Podatki_csv["WS"])
 Moc_izborov <- aggregate(Podatki_csv$WS, by=list(Podatki_csv$Pk), FUN=sum)
 colnames(Moc_izborov) <- c("Izbor","Moč")
 
+
+
 ocene_igralcev <-  Skupni_podatki[c(1,2,3,4,12)]
 colnames(ocene_igralcev) <- c("runda","Izbor","Ekipa","Igralec","WS")
 
@@ -44,15 +46,12 @@ Uspesnost_drzav <- merge(Uspesnost_drzav,igralci_drzava)
 
 Evropske <- Uspesnost_drzav[-c(1, 2, 3, 5, 6, 7, 8, 9, 12, 13, 16, 17, 18, 24, 29, 30, 31, 32, 33, 35, 40,44:53), ] 
 
-Evropske.norm <- Evropske %>% select(-drzava, -Let, -Igralcev) %>% scale()
-rownames(Evropske.norm) <- Evropske$drzava
+
 
 najboljsi_igralci <-   Skupni_podatki[rev(order(Skupni_podatki$WS)),]
-najboljsi_igralci <- najboljsi_igralci[c(1:10),]
+najboljsi_igralci <- najboljsi_igralci[c(1:4,7,24),]
+najboljsi_igralci["#"] <- c(1,2,3,4,7,24) 
 
-
-row.names(Skupni_podatki) <- Skupni_podatki$Igralec
-Skupni_podatki$Igralec <- NULL
 
 Evropske1 <- Evropske
 row.names(Evropske1) <- Evropske1$drzava
@@ -63,6 +62,8 @@ Ekipe1 <- Uspesnost_ekip
 row.names(Ekipe1) <- Ekipe1$Ekipa
 Ekipe1$Ekipa <- NULL
 
+
+rm(a)
 #Število skupin
 n <- 3
 skupine_drzav <- hclust(dist(scale(Evropske1))) %>% cutree(n)
@@ -70,7 +71,6 @@ m <- 5
 skupine_ekip <- hclust(dist(scale(Ekipe1))) %>% cutree(m)
 
 skupine_ekip <- inner_join(Uspesnost_ekip, data.frame(Ekipa = names(skupine_ekip),skupina = factor(skupine_ekip)), by = "Ekipa")
-
 
 
 
@@ -94,26 +94,22 @@ skupine_evropskih$skupina[skupine_evropskih$skupina == "3"] <- "Srednje uspešne
 
 #Grafi
 
-graf_Uspeh <- ggplot(data = Uspesnost_ekip) + 
-  aes(x = reorder(Ekipa, -Uspeh), y = Uspeh)+ 
+graf_Izborov <- ggplot(data = Moc_izborov) + 
+  aes(x = Izbor, y = Moc)+ 
   geom_bar(stat="identity",fill ="cornflowerblue") + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
   xlab("Ekipa") + 
   ylab("Uspeh") +
   ggtitle("Uspešnost ekip na naborih")
 
-graf_Relativen_uspeh <- ggplot(data = Uspesnost_ekip) + 
-  aes(x = reorder(Ekipa, -Relativen_uspeh), y = Relativen_uspeh)+ 
-  geom_bar(stat="identity",fill ="red") + 
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
-  xlab("Ekipa") + 
-  ylab("Relativen_uspeh") +
-  ggtitle("Uspešnost ekip na naborih")
+
 
 
 
 Graf_ekip <- ggplot(skupine_ekip, aes(x = Uspeh, y = Relativen_uspeh, color = skupina, size = Povprecen_izbor/30))+ geom_point() +
   ggtitle("Uspešnost ekip na naborih") +
+  geom_text(data=skupine_ekip[skupine_ekip$Ekipa %in% c('OKC','IND','DAL','PHO','BOS'),], 
+  mapping=aes(x=Uspeh, y=Relativen_uspeh, label=Ekipa), size=3, vjust=1.5) +
   xlab(expression("Uspeh")) + ylab("Relativen uspeh") +
   guides(color = guide_legend(title = "Skupina"),
          size = guide_legend(title = "Povprecen_izbor"))
@@ -121,7 +117,7 @@ Graf_ekip <- ggplot(skupine_ekip, aes(x = Uspeh, y = Relativen_uspeh, color = sk
 
 
   
-ex = skupine_evropskih[c(2,5,7,10,16,17,18,20),]
+ex = skupine_evropskih[c(5,7,10,16,17,18,20),]
 
 Graf_EU <- ggplot() + 
     geom_point(data=skupine_evropskih, mapping=aes(x=Igralcev, y=Uspeh, fill=skupina), size=3, shape=21, color="black") +
@@ -159,7 +155,7 @@ zemljevid1 <- ggplot(data = zemljevid) + geom_polygon(data = zemljevid %>% left_
   geom_text(data = inner_join(zemljevid, ex, by = c("drzava" = "drzava")) %>%
               group_by(drzava) %>%
               summarise(avg_long = mean(long), avg_lat = mean(lat)),
-            aes(x = avg_long, y = avg_lat, label = drzava), color = "red") +
+            aes(x = avg_long, y = avg_lat, label = drzava), color = "yellow") +
   xlab("long") + ylab("lat") +
   coord_quickmap(xlim = c(-25, 40), ylim = c(32, 72))
 
