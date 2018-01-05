@@ -10,7 +10,7 @@ output:
 runtime: shiny
 ---
 
-```{r setup, echo=FALSE, results='hide', message=FALSE}
+```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # Če želimo nastaviti pisave v PDF-ju, odkomentiramo
 # in sledimo navodilom v programu.
 #source("fontconfig.r", encoding = "UTF-8")
@@ -61,18 +61,47 @@ V tretji fazi sem želel čim lepše prikazati uspešnost ekip, draž in igralce
 ```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE}
 source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 ```
-Najprej si oglejmo tabelo najboljših igralcev. Hitro opazimo velike razlike med igralci, kar je dober znak za začetek analize. V ligi NBA namreč velja, da lahko en dober igralec reši celotno ekipo. 
+Najprej si oglejmo tabelo najboljših igralcev. Hitro opazimo velike razlike med igralci, kar je dober znak za začetek analize. V ligi NBA namreč velja, da lahko en dober igralec reši celotno ekipo. Najboljši evropski igralec je Marc Gasol na sedmem mestu. Goran Dragić pa je 24.
 
 ```{r razpredelnice}
 kable(head(najboljsi_igralci), caption = "Najboljši igralci v ligi NBA")
 ```
 
+Opazimo, da je bilo vseh 5 najboljših igralcev izbranih meed 1. in 7. naborom. Zato nas zanima, kako nabor vpliva na kvaliteto igralcev. Po pričakovanjih višji izbori prinašajo boljše igralce. Vendar zaporedje ni monotono. Najbolj uspešni so igralci, izbrani na 3. mestu.
 
-
-
-```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
-Graf_evropskih
+```{r Graf0,echo=FALSE,fig.align='center'}
+print(graf_Izborov)
 ```
+
+
+Nadaljujemo z analizo evropskih držav. V grafu vdidimo uspešnost (vstota 'Win-shares') in število igralcev, ki je igralo v ligi. V ospredju sta Španija in Francija, ki močno odstopata od konkurence. Edini Slovenec izbran v obdobju 2007-2012 je Goran Dragić, ki nas sam uvršča na 5. mesto med evropskimi državami.  
+
+
+```{r graf1, echo=FALSE, fig.align='center', fig.cap='SKupni uspeh in število igralcev'}
+print(Graf_EU) 
+
+```
+
+Sedaj si oglejmo rezultate še na zemljevidu:
+
+
+
+```{r graf2, echo=FALSE, fig.align='center', fig.cap='Evrospke Države'}
+print(zemljevid1) 
+```
+
+```{r graf3, echo=FALSE, fig.align='center', fig.cap='Evrospke Države'}
+print(zemljevid2) 
+```
+
+Prav tako nas zanimajo ekipe. Po absolutnem uspehu vodi Oklahoma, vendar je njihov uspeh posledica odličnega izhodišča na naborih. Relativno najuspešnejša je Indiana. Pozitivno Izstopa še San Antonio, ki je z visokimi izbori dosegel izredne rezultate. Negativno izstopata Phoenix in Boston, Phoenix je po relativni uspešnosti celo negativen. 
+
+```{r graf4, echo=FALSE, fig.align='center', fig.cap='Ekipe'}
+print(Graf_ekip) 
+
+```
+
+
 
 
 ***
