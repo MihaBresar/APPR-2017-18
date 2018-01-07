@@ -1,24 +1,25 @@
 library(shiny)
+require(stats)
+library(mgcv)
+#source("../vizualizacija/vizualizacija.r", encoding = "UTF-8")
+
 
 shinyServer(function(input, output) {
-  output$druzine <- DT::renderDataTable({
-    dcast(druzine, obcina ~ velikost.druzine, value.var = "stevilo.druzin") %>%
-      rename(`Občina` = obcina)
+  output$tabele <- DT::renderDataTable({
+    dcast(Skupni_podatki[c('Igralec', 'Pozicija', input$sprem1)], Igralec ~ Pozicija, value.var = input$sprem1)
+
   })
   
-  output$pokrajine <- renderUI(
-    selectInput("pokrajina", label="Izberi pokrajino",
-                choices=c("Vse", levels(obcine$pokrajina)))
-  )
-  output$naselja <- renderPlot({
-    main <- "Pogostost števila naselij"
-    if (!is.null(input$pokrajina) && input$pokrajina %in% levels(obcine$pokrajina)) {
-      t <- obcine %>% filter(pokrajina == input$pokrajina)
-      main <- paste(main, "v regiji", input$pokrajina)
-    } else {
-      t <- obcine
-    }
-    ggplot(t, aes(x = naselja)) + geom_histogram() +
-      ggtitle(main) + xlab("Število naselij") + ylab("Število občin")
+  
+  output$grafi <- renderPlot({
+    tabela <- nabori[c('Nabor', input$sprem2)]
+    colnames(tabela) <- c('Nabor', 'sprem')
+    print(tabela)
+    lin <- lm(data = tabela, sprem ~ Nabor)
+    print(ggplot(tabela) +
+            aes(x=Nabor, y=sprem) + geom_line() +
+            ggtitle(paste(input$sprem2, 'skozi leta', sep = ' ')) +
+            xlab('Nabor') + ylab(input$sprem2))
   })
+  
 })
