@@ -15,14 +15,14 @@ shinyUI(fluidPage(
                mainPanel(DT::dataTableOutput("tabele")))
     ),
     
-    tabPanel("Graf", 
+   tabPanel("Graf", 
 
              sidebarPanel(
-               selectInput("sprem2", label="Izberi spremenljivko",
-                           choices=colnames(nabori[c(-1,-8)]), selected='WS'),
-               checkboxGroupInput('ostalo', label="Izberi države",
-                                               selected=c(1))
-             ),
+             selectInput("sprem2", label="Izberi spremenljivko",
+                          choices=colnames(nabori[c(-1,-8)]), selected='WS'),
+             checkboxGroupInput('ostalo', label="",
+                                              selected=c(1))
+            ),
              mainPanel(plotOutput("grafi"))),
     
   
@@ -34,11 +34,11 @@ shinyUI(fluidPage(
                          choices=colnames(Skupni_podatki[c(-1,-2,-3,-4,-14,-15,-16)]), selected='WS'),
              selectInput("spremenljivka2", label="Izberi spremenljivko na y osi",
                          choices=colnames(Skupni_podatki[c(-1,-2,-3,-4,-14,-15,-16)]), selected='G'),
-             sliderInput('letnica', label='Izberi leto',
+             sliderInput('letnica', label="Izberi nabor",
                          min=2007, max=2012, step=1, value = 2007),
              selectInput("priblizek2", label="Izberi regresivno funkcijo:",
                          choices=c('Izberi funkcijo', 'y ~ x', 'y ~ x + I(x^2)', 'y ~ x + I(x^2) + I(x^3)'), selected='Izberi funkcijo'),
-             sliderInput('skup', label='Izberi število skupin glede na BDPpc',
+             sliderInput('skup', label='Izberi število skupin glede na WS',
                          min=1, max=25, step=1, value = 5)
 
            ),
