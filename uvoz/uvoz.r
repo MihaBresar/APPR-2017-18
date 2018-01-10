@@ -98,3 +98,20 @@ Podatki_csv[is.na(Podatki_csv)] = 0
 rm(df,a1,a2,a3,a4,a5,a6,b1,b2,b3,b4,b5,b6)
 Skupni_podatki <- Skupni_podatki[-c(7:10,12:13,19,20)]
 
+Pravi_2006<- uvoz_csv("podatki/2006draft.csv")
+Pravi_2006 <- separate(Pravi_2006,"Player", c("Igralec", "koda"), sep = "\\\\")
+Pravi_2006 <- Pravi_2006[-c(5,6)]
+Pravi_2006 <- Pravi_2006[c(2,4,14:18,21)]
+
+Pravi_2006 <- filter(Pravi_2006, Pravi_2006$Pk < 7)
+
+
+
+Pravi_2013<- uvoz_csv("podatki/2013draft.csv")
+Pravi_2013 <- separate(Pravi_2013,"Player", c("Igralec", "koda"), sep = "\\\\")
+Pravi_2013 <- Pravi_2013[-c(5,6)]
+Pravi_2013 <- Pravi_2013[c(2,4,14:18,21)]
+
+Pravi_2013 <- filter(Pravi_2013, Pravi_2013$Pk < 6)
+
+
