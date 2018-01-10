@@ -11,8 +11,8 @@ shinyServer(function(input, output) {
   })
   
   
-  output$grafi <- renderPlot({
-    tabela <- nabori[c('Nabor', input$sprem2)]
+output$grafi <- renderPlot({
+   tabela <- nabori[c('Nabor', input$sprem2)]
     colnames(tabela) <- c('Nabor', 'sprem')
     print(tabela)
     lin <- lm(data = tabela, sprem ~ Nabor)
