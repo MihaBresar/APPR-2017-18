@@ -10,7 +10,7 @@ output:
 runtime: shiny
 ---
 
-```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE,include=TRUE}
 # Če želimo nastaviti pisave v PDF-ju, odkomentiramo
 # in sledimo navodilom v programu.
 #source("fontconfig.r", encoding = "UTF-8")
@@ -104,7 +104,33 @@ print(Graf_ekip)
 
 
 
-***
+
 
 # Napredna analiza podatkov
+
+
+```{r analiza, echo=FALSE, message=FALSE, warning=FALSE}
+source("analiza/analiza.r", encoding = "UTF-8")
+```
+
+V napredni analizi podatkov sem želel napovedati uspešnost igralcev, na podlagi pridobljenih podatkov. Za začetek sem ocenil izbora 2013 in 2006. Nato pa sem dodal še napoved za Luko Dončiča
+
+
+```{r tabela,include=TRUE}
+kable(head(Napoved2006), caption = "Napoved za leto 2013")
+```
+```{r tabela2,include=TRUE}
+kable(head(Pravi_2006), caption = "Napoved za leto 2013")
+```
+```{r tabela3,include=TRUE}
+kable(head(Napoved2013), caption = "Napoved za leto 2013")
+```
+
+```{r tabela4,include=TRUE}
+kable(head(Pravi_2013), caption = "Napoved za leto 2013")
+```
+
+
+
+
 
