@@ -4,7 +4,7 @@
 
 Podatki_csv["WS"] <- abs(Podatki_csv["WS"])
 Moc_izborov <- aggregate(Podatki_csv$WS, by=list(Podatki_csv$Pk), FUN=sum)
-colnames(Moc_izborov) <- c("Izbor","Moč")
+colnames(Moc_izborov) <- c("Izbor","Moc")
 
 
 
@@ -13,11 +13,32 @@ colnames(ocene_igralcev) <- c("runda","Izbor","Ekipa","Igralec","WS")
 
 ocene_igralcev<- inner_join(ocene_igralcev, Moc_izborov, by = "Izbor", copy = FALSE)
 
-a <- ocene_igralcev["WS"]/abs(ocene_igralcev["Moč"])
+a <- ocene_igralcev["WS"]/abs(ocene_igralcev["Moc"])
 
 ocene_igralcev["uspeh"] <- a
 
 
+Nabori1 <- aggregate(Skupni_podatki$WS, by=list(Skupni_podatki$Leto), FUN=sum)
+Nabori2 <- aggregate(Skupni_podatki$G, by=list(Skupni_podatki$Leto), FUN=sum)
+Nabori3 <- aggregate(Skupni_podatki$PTS_1, by=list(Skupni_podatki$Leto), FUN=sum)
+Nabori4 <- aggregate(Skupni_podatki$TRB_1, by=list(Skupni_podatki$Leto), FUN=sum)
+Nabori5 <- aggregate(Skupni_podatki$VORP, by=list(Skupni_podatki$Leto), FUN=sum)
+Nabori6 <- aggregate(Skupni_podatki$AST_1, by=list(Skupni_podatki$Leto), FUN=sum)
+
+
+colnames(Nabori1) <- c("Nabor","WS")
+colnames(Nabori2) <- c("Nabor","Igre")
+colnames(Nabori3) <- c("Nabor","Točke")
+colnames(Nabori4) <- c("Nabor","Skoki")
+colnames(Nabori5) <- c("Nabor","ValueORP")
+colnames(Nabori6) <- c("Nabor","Podaje")
+
+
+nabori <- Reduce(function(x, y) merge(x, y, all=TRUE), list(Nabori1, Nabori2, Nabori3,Nabori4,Nabori5,Nabori6))
+
+rm(Nabori1, Nabori2, Nabori3,Nabori4,Nabori5,Nabori6)
+
+nabori[,'ostalo'] <- c(1)
 
 Uspesnost_ekip1 <- aggregate(Skupni_podatki$WS, by=list(Skupni_podatki$Tm), FUN=sum)
 Uspesnost_ekip2 <- aggregate(ocene_igralcev$uspeh, by=list(ocene_igralcev$Ekipa), FUN=sum)

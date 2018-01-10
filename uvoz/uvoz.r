@@ -96,5 +96,5 @@ Skupni_podatki[is.na(Skupni_podatki)] = 0
 Podatki_csv[is.na(Podatki_csv)] = 0
 
 rm(df,a1,a2,a3,a4,a5,a6,b1,b2,b3,b4,b5,b6)
-
+Skupni_podatki <- Skupni_podatki[-c(7:10,12:13,19,20)]
 
