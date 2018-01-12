@@ -10,7 +10,7 @@ output:
 runtime: shiny
 ---
 
-```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE,include=TRUE}
+```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # Če želimo nastaviti pisave v PDF-ju, odkomentiramo
 # in sledimo navodilom v programu.
 #source("fontconfig.r", encoding = "UTF-8")
@@ -27,7 +27,7 @@ V projektu bom analiziral nabore v ligi NBA med letoma 2007 in 2012. Igralci izb
 
 # Obdelava, uvoz in čiščenje podatkov
 
-```{r uvoz, echo=FALSE, message=FALSE}
+```{r uvoz, echo=FALSE, message=FALSE, warning=FALSE}
 source("uvoz/uvoz.r", encoding = "UTF-8")
 ```
 
@@ -130,6 +130,10 @@ kable(head(Napoved2013), caption = "Napoved za leto 2013")
 kable(head(Pravi_2013), caption = "Napoved za leto 2013")
 ```
 
+```{r shiny, echo=FALSE}
+
+shinyAppDir("shiny", options=list(width="100%", height=600))
+```
 
 
 
