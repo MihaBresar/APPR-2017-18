@@ -127,7 +127,7 @@ graf_Izborov <- ggplot(data = Moc_izborov) +
 
 
 
-Graf_ekip <- ggplot(skupine_ekip, aes(x = Uspeh, y = Relativen_uspeh, color = skupina, size = Povprecen_izbor/30))+ geom_point() +
+Graf_ekip <- ggplot(skupine_ekip, aes(x = Uspeh, y = Relativen_uspeh, color = skupina, size = Povprecen_izbor))+ geom_point() +
   ggtitle("Uspešnost ekip na naborih") +
   geom_text(data=skupine_ekip[skupine_ekip$Ekipa %in% c('OKC','IND','DAL','PHO','BOS'),], 
   mapping=aes(x=Uspeh, y=Relativen_uspeh, label=Ekipa), size=3, vjust=1.5) +
