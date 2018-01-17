@@ -15,7 +15,7 @@ https://www.basketball-reference.com/draft/
 
 https://en.wikipedia.org/wiki/NBA_draft 
 
-Tabele (osnovna ideja):
+Tabele:
 
 V tabelah bom zbral podatke:
 
@@ -23,21 +23,19 @@ V tabelah bom zbral podatke:
  
   1. Ime in Priimek igralca
 
-  2. Univerza kjer je igral pred naborom
+  2. Država
 
   3. Izbor
 
   4. Leto nabora  
+  
+  5. Pozicija
+  
+  6. Ekipa
 
-  5.Podatki o uspešnost igralcev(odigrane tekme, točke, win-shares, ...)
+  7.Podatki o uspešnost igralcev(odigrane tekme, točke, win-shares, ...)
 
-Ekipe:
- 
- 1. Ime
- 
- 2. Uspešnost na naborih
- 
- 3. Zmage
+
  
 Načrt:
 
