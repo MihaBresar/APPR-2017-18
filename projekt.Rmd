@@ -117,10 +117,10 @@ V napredni analizi podatkov sem želel napovedati uspešnost igralcev, na podlag
 
 
 ```{r tabela,include=TRUE}
-kable(head(Napoved2006), caption = "Napoved za leto 2013")
+kable(head(Napoved2006), caption = "Napoved za leto 2006")
 ```
 ```{r tabela2,include=TRUE}
-kable(head(Pravi_2006), caption = "Napoved za leto 2013")
+kable(head(Pravi_2006), caption = "Napoved za leto 2006")
 ```
 ```{r tabela3,include=TRUE}
 kable(head(Napoved2013), caption = "Napoved za leto 2013")
