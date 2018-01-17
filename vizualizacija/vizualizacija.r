@@ -119,9 +119,9 @@ graf_Izborov <- ggplot(data = Moc_izborov) +
   aes(x = Izbor, y = Moc)+ 
   geom_bar(stat="identity",fill ="cornflowerblue") + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
-  xlab("Ekipa") + 
+  xlab("Izbor") + 
   ylab("Uspeh") +
-  ggtitle("Uspešnost ekip na naborih")
+  ggtitle("Moč Izborov")
 
 
 
