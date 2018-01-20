@@ -24,6 +24,8 @@ source("lib/libraries.r", encoding = "UTF-8")
 V projektu bom analiziral nabore v ligi NBA med letoma 2007 in 2012. Igralci izbrani na teh naborih so namreč sedaj v najboljših letih. Zato jih lahko dobro analiziramo. Analiziral bom uspešnost ekip in igralcev. Igralce bom ocenjeval na podlagi statistike in dobrinosa ekipi. Ekipe pa na podlagi uspešnosti igralcev ki so jih izbrale na naborih. S to analizo želim ugotoviti, katere ekipe so najboljše pri izbiranju mladih igralcev. Analiziral bom tudi evropske države in uspeh evropskih igralcev v ligi NBA. Za konec želim na podlagi rezultatov preteklih let napovedati uspeh igralcev, ki bodo letos začeli kariero. 
 
 ***
+![](http://www.basketballinsiders.com/wp-content/uploads/2015/05/Finals_CurryIrving1.jpg)
+
 
 # Obdelava, uvoz in čiščenje podatkov
 
@@ -63,11 +65,11 @@ source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 ```
 Najprej si oglejmo tabelo najboljših igralcev. Hitro opazimo velike razlike med igralci, kar je dober znak za začetek analize. V ligi NBA namreč velja, da lahko en dober igralec reši celotno ekipo. Najboljši evropski igralec je Marc Gasol na sedmem mestu. Goran Dragić pa je 24.
 
-```{r razpredelnice}
-kable(head(najboljsi_igralci), caption = "Najboljši igralci v ligi NBA")
+```{r razpredelnice,echo=FALSE}
+kable(head(najboljsi_igralci), caption = "Najboljši igralci v ligi NBA",encoding = "UTF-8")
 ```
 
-Opazimo, da je bilo vseh 5 najboljših igralcev izbranih meed 1. in 7. naborom. Zato nas zanima, kako nabor vpliva na kvaliteto igralcev. Po pričakovanjih višji izbori prinašajo boljše igralce. Vendar zaporedje ni monotono. Najbolj uspešni so igralci, izbrani na 3. mestu.
+Opazimo, da je bilo vseh 5 najboljših igralcev izbranih meed 1. in 7. naborom. Zato nas zanima, kako nabor vpliva na kvaliteto igralcev. Po pričakovanjih višji izbori prinašajo boljše igralce. Vendar zaporedje ni monotono padajoče. Najbolj uspešni so igralci, izbrani na 3. mestu.
 
 ```{r Graf0,echo=FALSE,fig.align='center'}
 print(graf_Izborov)
@@ -75,6 +77,8 @@ print(graf_Izborov)
 
 
 Nadaljujemo z analizo evropskih držav. V grafu vdidimo uspešnost (vstota 'Win-shares') in število igralcev, ki je igralo v ligi. V ospredju sta Španija in Francija, ki močno odstopata od konkurence. Edini Slovenec izbran v obdobju 2007-2012 je Goran Dragić, ki nas sam uvršča na 5. mesto med evropskimi državami.  
+
+
 
 
 ```{r graf1, echo=FALSE, fig.align='center', fig.cap='SKupni uspeh in število igralcev'}
@@ -86,7 +90,7 @@ Sedaj si oglejmo rezultate še na zemljevidu:
 
 
 
-```{r graf2, echo=FALSE, fig.align='center', fig.cap='Evrospke Države'}
+```{r graf2, echo=FALSE, fig.align='center', fig.cap='Evropske Države'}
 print(zemljevid1) 
 ```
 
@@ -113,22 +117,31 @@ print(Graf_ekip)
 source("analiza/analiza.r", encoding = "UTF-8")
 ```
 
-V napredni analizi podatkov sem želel napovedati uspešnost igralcev, na podlagi pridobljenih podatkov. Za začetek sem ocenil izbora 2013 in 2006. Nato pa sem dodal še napoved za Luko Dončiča
+V napredni analizi podatkov sem želel napovedati uspešnost igralcev, na podlagi pridobljenih podatkov. Za začetek sem ocenil izbora 2013 in 2006, s pomočjo regresijskih funkcij.Rezultatom napovedi pa sem dodal še statistične podatke, ki so jih igralci res dosegli. 
 
 
-```{r tabela,include=TRUE}
+```{r tabela,echo=FALSE}
 kable(head(Napoved2006), caption = "Napoved za leto 2006")
 ```
-```{r tabela2,include=TRUE}
-kable(head(Pravi_2006), caption = "Napoved za leto 2006")
+```{r tabela2,echo=FALSE}
+kable(head(Pravi_2006), caption = "Podatki za leto 2006")
 ```
-```{r tabela3,include=TRUE}
+```{r tabela3,echo=FALSE}
 kable(head(Napoved2013), caption = "Napoved za leto 2013")
 ```
 
-```{r tabela4,include=TRUE}
-kable(head(Pravi_2013), caption = "Napoved za leto 2013")
+```{r tabela4,echo=FALSE}
+kable(head(Pravi_2013), caption = "Podatki za leto 2013")
 ```
+
+
+V zaključku sem poizkusil napovedati uspešnost Luke Dončiča, ki bo letos izbran na naboru. Rezultate v tabeli primerjam  Goranom Dragičem, ki velja za najboljšega slovenskega igralca vseh časov.
+
+
+```{r tabela5,echo=FALSE}
+kable(head(NapovedDoncic), caption = "Podatki za leto 2013")
+```
+
 
 ```{r shiny, echo=FALSE}
 
