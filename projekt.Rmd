@@ -66,7 +66,7 @@ source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 Najprej si oglejmo tabelo najboljših igralcev. Hitro opazimo velike razlike med igralci, kar je dober znak za začetek analize. V ligi NBA namreč velja, da lahko en dober igralec reši celotno ekipo. Najboljši evropski igralec je Marc Gasol na sedmem mestu. Goran Dragić pa je 24.
 
 ```{r razpredelnice,echo=FALSE}
-kable(head(najboljsi_igralci), caption = "Najboljši igralci v ligi NBA",encoding = "UTF-8")
+kable(head(najboljsi_igralci), caption = "Najboljsi igralci v ligi NBA")
 ```
 
 Opazimo, da je bilo vseh 5 najboljših igralcev izbranih meed 1. in 7. naborom. Zato nas zanima, kako nabor vpliva na kvaliteto igralcev. Po pričakovanjih višji izbori prinašajo boljše igralce. Vendar zaporedje ni monotono padajoče. Najbolj uspešni so igralci, izbrani na 3. mestu.
@@ -81,7 +81,7 @@ Nadaljujemo z analizo evropskih držav. V grafu vdidimo uspešnost (vstota 'Win-
 
 
 
-```{r graf1, echo=FALSE, fig.align='center', fig.cap='SKupni uspeh in število igralcev'}
+```{r graf1, echo=FALSE, fig.align='center', fig.cap='Skupni uspeh in število igralcev'}
 print(Graf_EU) 
 
 ```
@@ -139,7 +139,7 @@ V zaključku sem poizkusil napovedati uspešnost Luke Dončiča, ki bo letos izb
 
 
 ```{r tabela5,echo=FALSE}
-kable(head(NapovedDoncic), caption = "Podatki za leto 2013")
+kable(head(NapovedDoncic), caption = "Primerjava Dragiča in Dončiča")
 ```
 
 
