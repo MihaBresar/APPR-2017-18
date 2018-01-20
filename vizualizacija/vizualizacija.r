@@ -73,6 +73,8 @@ najboljsi_igralci <-   Skupni_podatki[rev(order(Skupni_podatki$WS)),]
 najboljsi_igralci <- najboljsi_igralci[c(1:4,7,24),]
 najboljsi_igralci["#"] <- c(1,2,3,4,7,24) 
 
+names(najboljsi_igralci)[c(8:13)] <- c("Minute", "Točke", "Skoki","Podaje","Uspešnost","Dodana vrednost")
+
 
 Evropske1 <- Evropske
 row.names(Evropske1) <- Evropske1$drzava
@@ -133,7 +135,7 @@ Graf_ekip <- ggplot(skupine_ekip, aes(x = Uspeh, y = Relativen_uspeh, color = sk
   mapping=aes(x=Uspeh, y=Relativen_uspeh, label=Ekipa), size=3, vjust=1.5) +
   xlab(expression("Uspeh")) + ylab("Relativen uspeh") +
   guides(color = guide_legend(title = "Skupina"),
-         size = guide_legend(title = "Povprecen_izbor"))
+         size = guide_legend(title = "Povprečen_izbor"))
 
 
 

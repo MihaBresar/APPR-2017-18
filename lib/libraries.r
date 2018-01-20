@@ -7,7 +7,9 @@ library(ggplot2)
 library(reshape2)
 library(shiny)
 library(tidyr)
-
+library(shiny)
+require(stats)
+library(mgcv)
 
 
 source("lib/uvozi.zemljevid.r", encoding = "UTF-8")
