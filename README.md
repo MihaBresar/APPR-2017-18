@@ -15,11 +15,11 @@ https://www.basketball-reference.com/draft/
 
 https://en.wikipedia.org/wiki/NBA_draft 
 
-Tabele:
+## Tabele:
 
 V tabelah bom zbral podatke:
 
- Igralci:
+# Tabela1 (Osebni podatki igralcev):
  
   1. Ime in Priimek igralca
 
@@ -33,8 +33,14 @@ V tabelah bom zbral podatke:
   
   6. Ekipa
 
-  7.Podatki o uspešnost igralcev(odigrane tekme, točke, win-shares, ...)
-
+ # Tabela2 (Statistični podatki Igralcev) :
+ 
+ 1. Odigrane tekme
+ 2. Minute/tekmo
+ 3. Točke/tekmo
+ .
+ .
+ .
 
  
 Načrt:
