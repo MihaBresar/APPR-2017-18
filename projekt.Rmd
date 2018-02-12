@@ -58,7 +58,7 @@ Obe tabeli sem nato združil v eno veliko tabelo Skupni_podatki
 
 # Analiza in vizualizacija podatkov
 
-V tretji fazi sem želel čim lepše prikazati uspešnost ekip, draž in igralcev. Začel sem z 'normiranjem igralcev na izbor'. To sem naredil tako, da sem seštel absolutne vrednosti 'win-shares' za vsak izbor. Tako sem dobil absolutno in relativno uspešnost igralcev. Absolutna: Koliko zmag je prinesel igralec ekipi. Relativna: Uspešnost/(vsota absolutnih vrednosti za nabor). Relativna uspešnost je smiselno uporabiti predvsem pri ocenjevanju ekip, saj imajo nekatere ekipe višje izbore kot druge. Pri ocenjevanju Držav sem se osredotočil na absolutno uspešnost in na število igralcev, ki so bili izbrani na naborih. 
+V tretji fazi sem želel čim lepše prikazati uspešnost ekip, držav in igralcev. Začel sem z 'normiranjem igralcev na izbor'. To sem naredil tako, da sem seštel absolutne vrednosti 'win-shares' za vsak izbor. Tako sem dobil absolutno in relativno uspešnost igralcev. Absolutna: Koliko zmag je prinesel igralec ekipi. Relativna: Uspešnost/(vsota absolutnih vrednosti za nabor). Relativna uspešnost je smiselno uporabiti predvsem pri ocenjevanju ekip, saj imajo nekatere ekipe višje izbore kot druge. Pri ocenjevanju Držav sem se osredotočil na absolutno uspešnost in na število igralcev, ki so bili izbrani na naborih. 
 
 ```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE}
 source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
@@ -135,7 +135,7 @@ kable(head(Pravi_2013), caption = "Podatki za leto 2013")
 ```
 
 
-V zaključku sem poizkusil napovedati uspešnost Luke Dončiča, ki bo letos izbran na naboru. Rezultate v tabeli primerjam  Goranom Dragičem, ki velja za najboljšega slovenskega igralca vseh časov. Opazimo, da pričakovani rezultati redko dobro napovejo uspešnost igralcev v ligi. To ni presenetljivo, saj izbira pravega igralca velikokrat spodleti skavtom talentov, ki se s tem ukvarjajo profesionalno. Zato nas ne preseneča, da preprost program ni napovedal, kateri igralci bodo uspeli. Rezultati so zato bolj zanimivi, če jih obravnavamo kot pričakovano vrednost. V ligi NBA se velikokrat zgodi, da ekipi zamenjata izbor na naboru za igralca. S temi rezultati lahko tako aproksimiramo. Kako dobremu igralcu se odreka ekipa, ki zamenja izbor na naboru. 
+V zaključku sem poizkusil napovedati uspešnost Luke Dončiča, ki bo letos izbran na naboru. Rezultate v tabeli primerjam  Goranom Dragičem, ki velja za najboljšega slovenskega igralca vseh časov. Opazimo, da pričakovani rezultati redko dobro napovejo uspešnost igralcev v ligi. To ni presenetljivo, saj izbira pravega igralca velikokrat spodleti skavtom talentov, ki se s tem ukvarjajo profesionalno. Zato nas ne preseneča, da preprost program ni napovedal, kateri igralci bodo uspeli. Rezultati so zato bolj zanimivi, če jih obravnavamo kot pričakovano vrednost. V ligi NBA se velikokrat zgodi, da ekipi zamenjata izbor na naboru za igralca. S temi rezultati lahko tako aproksimiramo, kako dobremu igralcu se odreka ekipa, ki zamenja izbor na naboru. 
 
 
 ```{r tabela5,echo=FALSE}
