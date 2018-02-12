@@ -23,9 +23,9 @@ shinyUI(fluidPage(
              
              sidebarPanel(
                selectInput("spremenljivka1", label="Izberi spremenljivko na x osi",
-                           choices=colnames(Skupni_podatki[c(-1,-2,-3,-4,-14,-15,-16)]), selected='FG%'),
+                           choices=colnames(Skupni_podatki[c(-1,-3,-4,-14,-15,-16)]), selected='FG%'),
                selectInput("spremenljivka2", label="Izberi spremenljivko na y osi",
-                           choices=colnames(Skupni_podatki[c(-1,-2,-3,-4,-14,-15,-16)]), selected='Tocke'),
+                           choices=colnames(Skupni_podatki[c(-1,-3,-4,-14,-15,-16)]), selected='Tocke'),
                sliderInput('letnica', label="Izberi nabor",
                            min=2007, max=2012, step=1, value = 2007),
                selectInput("priblizek2", label="Izberi regresivno funkcijo:",

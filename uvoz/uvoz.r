@@ -114,4 +114,5 @@ Pravi_2013 <- Pravi_2013[c(2,4,14:18,21)]
 
 Pravi_2013 <- filter(Pravi_2013, Pravi_2013$Pk < 6)
 
-
+Tabela1 <- Skupni_podatki[4:13]
+Tabela2 <- Skupni_podatki[c(1:4,14:16)]
