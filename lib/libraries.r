@@ -10,6 +10,7 @@ library(tidyr)
 library(shiny)
 require(stats)
 library(mgcv)
+library(rsconnect)
 
 
 source("lib/uvozi.zemljevid.r", encoding = "UTF-8")
